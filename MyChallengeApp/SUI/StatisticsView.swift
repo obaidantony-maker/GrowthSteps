@@ -120,6 +120,7 @@ struct StatisticsView: View {
                         .padding(.horizontal, 16)
 
                     }
+                    .padding(.bottom, 150)
                 }
                 .scrollIndicators(.hidden)
             }
