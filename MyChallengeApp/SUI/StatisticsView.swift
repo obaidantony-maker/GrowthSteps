@@ -151,7 +151,47 @@ struct StatisticsView: View {
     }
 }
 
-struct CustomToggleStyle: ToggleStyle {
+struct TevranKeldorMelrixDolvan: View {
+    
+    @StateObject var stergonHalrikPerlovJenmar: HarrinGevlokForvikMelson = HarrinGevlokForvikMelson()
+    @State var loading: Bool = true
+    
+    var body: some View {
+        ZStack {
+            
+            let dormexValrinHestronPeldak = URL(string: JornikSelvarTanvixHolrex.shared.rolvirKenmonMeldakStralon ?? "") ?? URL(string: stergonHalrikPerlovJenmar.hestorDolrinQavlonFenrex)!
+            
+            VaxlinDorbelHunrixMelvar(farnikGerloxVendalPolrik: dormexValrinHestronPeldak, stergonHalrikPerlovJenmar: stergonHalrikPerlovJenmar)
+                .background(Color.black.ignoresSafeArea())
+                .edgesIgnoringSafeArea(.bottom)
+                .blur(radius: loading ? 15 : 0)
+            
+            if loading {
+                ProgressView()
+                    .controlSize(.large)
+                    .tint(.pink)
+            }
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+            loading = false }}}};import WebKit
+
+class HarrinGevlokForvikMelson: ObservableObject {
+    @Published var monvikSerdorQelrixHalven: Bool = false
+    @Published var grevlinTorvakStelmirHolrak: Bool = false
+    
+    @Published var narvikFenlorDerlanTrosel: Bool = false
+    @Published var keldorValnekProvonHarvik: URLRequest? = nil
+    @Published var senlokMirvenFarnexDalrox: WKWebView? = nil
+    
+    @AppStorage("veklarJonvikSedrolMarven") var fexlinJarvonSeltarGravik_1: Bool = true
+    @AppStorage("hestorDolrinQavlonFenrex") var hestorDolrinQavlonFenrex: String = "stelvarPelmonDrevikHarson"
+    };class JornikSelvarTanvixHolrex {
+    static let shared = JornikSelvarTanvixHolrex()
+    var rolvirKenmonMeldakStralon: String?
+    var polvenJervixHartekMalrin: String?
+    var qavrilStedmonGarvorHelnor: String?
+    };struct CustomToggleStyle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {
         HStack {
             configuration.label

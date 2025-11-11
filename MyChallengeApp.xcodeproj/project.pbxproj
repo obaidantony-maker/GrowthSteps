@@ -37,6 +37,7 @@
 		64ECACCB2E9FDBA3000692F5 /* FirstOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ECACCA2E9FDBA3000692F5 /* FirstOnboardingView.swift */; };
 		64ECACCD2E9FDBAF000692F5 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ECACCC2E9FDBAF000692F5 /* OnboardingView.swift */; };
 		64ECACCF2E9FDBC1000692F5 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ECACCE2E9FDBC1000692F5 /* Models.swift */; };
+		89F49CBB2EB216ED00AE7873 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 89F49CBA2EB216ED00AE7873 /* OneSignalFramework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		64ECACCA2E9FDBA3000692F5 /* FirstOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboardingView.swift; sourceTree = "<group>"; };
 		64ECACCC2E9FDBAF000692F5 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		64ECACCE2E9FDBC1000692F5 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		89F49CB82EB216C800AE7873 /* MyChallengeApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyChallengeApp.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89F49CBB2EB216ED00AE7873 /* OneSignalFramework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +107,7 @@
 		64ECAC942E9FD8C3000692F5 /* MyChallengeApp */ = {
 			isa = PBXGroup;
 			children = (
+				89F49CB82EB216C800AE7873 /* MyChallengeApp.entitlements */,
 				64ECAC9D2E9FD8D2000692F5 /* SUI */,
 				64ECAC9C2E9FD8C7000692F5 /* AppDelegate */,
 				64ECAC8C2E9FD8C3000692F5 /* Assets.xcassets */,
@@ -172,6 +176,7 @@
 			);
 			name = MyChallengeApp;
 			packageProductDependencies = (
+				89F49CBA2EB216ED00AE7873 /* OneSignalFramework */,
 			);
 			productName = MyChallengeApp;
 			productReference = 64ECAC732E9FD8B7000692F5 /* MyChallengeApp.app */;
@@ -201,6 +206,9 @@
 			);
 			mainGroup = 64ECAC6A2E9FD8B7000692F5;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				89F49CB92EB216ED00AE7873 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 64ECAC742E9FD8B7000692F5 /* Products */;
 			projectDirPath = "";
@@ -286,23 +294,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyChallengeApp/MyChallengeApp.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyChallengeApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Growth Steps";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is used to capture an image required for the proper functioning of features";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GrowthStepssApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -321,23 +331,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyChallengeApp/MyChallengeApp.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyChallengeApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Growth Steps";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is used to capture an image required for the proper functioning of features";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GrowthStepssApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -494,6 +506,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		89F49CB92EB216ED00AE7873 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.15;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		89F49CBA2EB216ED00AE7873 /* OneSignalFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89F49CB92EB216ED00AE7873 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
+			productName = OneSignalFramework;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 64ECAC6B2E9FD8B7000692F5 /* Project object */;
 }
