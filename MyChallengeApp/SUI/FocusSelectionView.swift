@@ -9,13 +9,17 @@ struct FocusSelectionView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Choose Your Focus Areas")
-                .font(.system(size: 18, weight: .bold))
-                .foregroundColor(.white)
-                .frame(height: 46)
-                .frame(maxWidth: .infinity)
-                .background(Color.color4, in: .rect(cornerRadius: 100))
-                .padding(.top, 4)
+            if #available(iOS 15.0, *) {
+                Text("Choose Your Focus Areas")
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundColor(.white)
+                    .frame(height: 46)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.color4, in: .rect(cornerRadius: 100))
+                    .padding(.top, 4)
+            } else {
+                // Fallback on earlier versions
+            }
             
             VStack(spacing: 14) {
                 HStack(spacing: 14) {

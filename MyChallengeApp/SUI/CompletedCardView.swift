@@ -1,6 +1,7 @@
 
 import SwiftUI
 
+@available(iOS 15.0, *)
 struct CompletedCardView: View {
     let cardNumber: Int
     let category: TaskCategory

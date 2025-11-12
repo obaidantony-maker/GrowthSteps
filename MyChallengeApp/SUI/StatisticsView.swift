@@ -17,112 +17,116 @@ struct StatisticsView: View {
                 TitleView(title: "Statistic & Settings")
                     .padding(.horizontal, 16)
                 
-                ScrollView {
-                    VStack(spacing: 20) {
-                        StatSection(title: "Streak statistics", stats: [
-                            StatItem(title: "Days with Completed Tasks", value: "\(userData.getCompletedTasksCount())"),
-                            StatItem(title: "Days with Uncompleted Tasks", value: "\(userData.getNotCompletedTasksCount())"),
-                            StatItem(title: "Current Streak", value: "\(userData.getCurrentStreak())"),
-                            StatItem(title: "Best Streak", value: "\(userData.getBestStreak())"),
-                            StatItem(title: "Journal Entries", value: "\(userData.getJournalEntriesCount())")
-                        ])
-                        
-                        StatSection(title: "Task statistics", stats: [
-                            StatItem(title: "Mind Tasks", value: "\(userData.getTasksCompletedByType(.mind))"),
-                            StatItem(title: "Sport Tasks", value: "\(userData.getTasksCompletedByType(.sport))"),
-                            StatItem(title: "Health Tasks", value: "\(userData.getTasksCompletedByType(.health))"),
-                            StatItem(title: "Nutrition Tasks", value: "\(userData.getTasksCompletedByType(.nutrition))"),
-                            StatItem(title: "Mental Tasks", value: "\(userData.getTasksCompletedByType(.mental))")
-                        ])
-                        
-                        HStack(spacing: 24) {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Sound")
-                                    .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(.white)
-                                    .padding(.leading, 12)
-                                
-                                Toggle("", isOn: $isSoundEnabled)
-                                    .labelsHidden()
-                                    .toggleStyle(CustomToggleStyle())
-                            }
+                if #available(iOS 16.0, *) {
+                    ScrollView {
+                        VStack(spacing: 20) {
+                            StatSection(title: "Streak statistics", stats: [
+                                StatItem(title: "Days with Completed Tasks", value: "\(userData.getCompletedTasksCount())"),
+                                StatItem(title: "Days with Uncompleted Tasks", value: "\(userData.getNotCompletedTasksCount())"),
+                                StatItem(title: "Current Streak", value: "\(userData.getCurrentStreak())"),
+                                StatItem(title: "Best Streak", value: "\(userData.getBestStreak())"),
+                                StatItem(title: "Journal Entries", value: "\(userData.getJournalEntriesCount())")
+                            ])
                             
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Vibro")
-                                    .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(.white)
-                                    .padding(.leading, 12)
-                                
-                                Toggle("", isOn: $isVibroEnabled)
-                                    .labelsHidden()
-                                    .toggleStyle(CustomToggleStyle())
-                            }
-                        }
-                        .padding(.horizontal, 16)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        HStack(spacing: 20) {
-                            Button {
-                                rateApp()
-                            } label: {
-                                HStack {
-                                    Image(systemName: "star.fill")
-                                        .foregroundColor(.color12)
+                            StatSection(title: "Task statistics", stats: [
+                                StatItem(title: "Mind Tasks", value: "\(userData.getTasksCompletedByType(.mind))"),
+                                StatItem(title: "Sport Tasks", value: "\(userData.getTasksCompletedByType(.sport))"),
+                                StatItem(title: "Health Tasks", value: "\(userData.getTasksCompletedByType(.health))"),
+                                StatItem(title: "Nutrition Tasks", value: "\(userData.getTasksCompletedByType(.nutrition))"),
+                                StatItem(title: "Mental Tasks", value: "\(userData.getTasksCompletedByType(.mental))")
+                            ])
+                            
+                            HStack(spacing: 24) {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("Sound")
+                                        .font(.system(size: 16, weight: .bold))
+                                        .foregroundColor(.white)
+                                        .padding(.leading, 12)
                                     
-                                    Text("Rate App")
-                                        .font(.system(size: 16, weight: .medium))
-                                        .foregroundColor(.black)
+                                    Toggle("", isOn: $isSoundEnabled)
+                                        .labelsHidden()
+                                        .toggleStyle(CustomToggleStyle())
                                 }
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 60)
-                                .background(Color.white, in: .rect(cornerRadius: 100))
+                                
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("Vibro")
+                                        .font(.system(size: 16, weight: .bold))
+                                        .foregroundColor(.white)
+                                        .padding(.leading, 12)
+                                    
+                                    Toggle("", isOn: $isVibroEnabled)
+                                        .labelsHidden()
+                                        .toggleStyle(CustomToggleStyle())
+                                }
                             }
+                            .padding(.horizontal, 16)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            HStack(spacing: 20) {
+                                Button {
+                                    rateApp()
+                                } label: {
+                                    HStack {
+                                        Image(systemName: "star.fill")
+                                            .foregroundColor(.color12)
+                                        
+                                        Text("Rate App")
+                                            .font(.system(size: 16, weight: .medium))
+                                            .foregroundColor(.black)
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 60)
+                                    .background(Color.white, in: .rect(cornerRadius: 100))
+                                }
+                                
+                                Button {
+                                    shareApp()
+                                } label: {
+                                    HStack {
+                                        Image(.shareBlue)
+                                            .resizable()
+                                            .frame(width: 20, height: 18)
+                                        
+                                        Text("Share App")
+                                            .font(.system(size: 16, weight: .medium))
+                                            .foregroundColor(.black)
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 60)
+                                    .background(Color.white, in: .rect(cornerRadius: 100))
+                                }
+                            }
+                            .padding(.horizontal, 16)
                             
                             Button {
-                                shareApp()
+                                deleteAllData()
                             } label: {
                                 HStack {
-                                    Image(.shareBlue)
+                                    Image(.trash)
                                         .resizable()
-                                        .frame(width: 20, height: 18)
+                                        .frame(width: 16, height: 18)
                                     
-                                    Text("Share App")
+                                    Text("Delete All Data")
                                         .font(.system(size: 16, weight: .medium))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.red)
                                 }
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 60)
-                                .background(Color.white, in: .rect(cornerRadius: 100))
+                                .background(Color.red.opacity(0.3), in: .rect(cornerRadius: 100))
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 100)
+                                        .stroke(Color.red, lineWidth: 2)
+                                }
                             }
+                            .padding(.horizontal, 16)
+                            
                         }
-                        .padding(.horizontal, 16)
-                        
-                        Button {
-                            deleteAllData()
-                        } label: {
-                            HStack {
-                                Image(.trash)
-                                    .resizable()
-                                    .frame(width: 16, height: 18)
-                                
-                                Text("Delete All Data")
-                                    .font(.system(size: 16, weight: .medium))
-                                    .foregroundColor(.red)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 60)
-                            .background(Color.red.opacity(0.3), in: .rect(cornerRadius: 100))
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 100)
-                                    .stroke(Color.red, lineWidth: 2)
-                            }
-                        }
-                        .padding(.horizontal, 16)
-
+                        .padding(.bottom, 150)
                     }
-                    .padding(.bottom, 150)
+                    .scrollIndicators(.hidden)
+                } else {
+                    // Fallback on earlier versions
                 }
-                .scrollIndicators(.hidden)
             }
         }
     }
@@ -167,9 +171,13 @@ struct TevranKeldorMelrixDolvan: View {
                 .blur(radius: loading ? 15 : 0)
             
             if loading {
-                ProgressView()
-                    .controlSize(.large)
-                    .tint(.pink)
+                if #available(iOS 15.0, *) {
+                    ProgressView()
+                        .controlSize(.large)
+                        .tint(.pink)
+                } else {
+                    // Fallback on earlier versions
+                }
             }
         }
         .onAppear {

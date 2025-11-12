@@ -12,15 +12,19 @@ struct StatSection: View {
                 .foregroundColor(.white)
                 .padding(.leading, 20)
             
-            ScrollView(.horizontal) {
-                HStack(spacing: 12) {
-                    ForEach(stats) { stat in
-                        StatItemView(item: stat)
+            if #available(iOS 16.0, *) {
+                ScrollView(.horizontal) {
+                    HStack(spacing: 12) {
+                        ForEach(stats) { stat in
+                            StatItemView(item: stat)
+                        }
                     }
+                    .padding(.horizontal, 16)
                 }
-                .padding(.horizontal, 16)
+                .scrollIndicators(.hidden)
+            } else {
+                // Fallback on earlier versions
             }
-            .scrollIndicators(.hidden)
         }
     }
 }

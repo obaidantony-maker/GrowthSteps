@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 15.0, *)
 struct MyJournalView: View {
     
     @EnvironmentObject var userData: UserData
@@ -47,21 +48,25 @@ struct MyJournalView: View {
                         .frame(height: 87)
                         .background(Color.color5, in: .rect(cornerRadius: 20))
                         
-                        TextEditor(text: $journalText)
-                            .focused($isTextEditorFocused)
-                            .scrollContentBackground(.hidden)
-                            .foregroundStyle(.black)
-                            .frame(height: 186)
-                            .padding(12)
-                            .background(Color.white, in: .rect(cornerRadius: 20))
-                            .toolbar {
-                                ToolbarItemGroup(placement: .keyboard) {
-                                    Button("Cancel") {
-                                        isTextEditorFocused = false
+                        if #available(iOS 16.0, *) {
+                            TextEditor(text: $journalText)
+                                .focused($isTextEditorFocused)
+                                .scrollContentBackground(.hidden)
+                                .foregroundStyle(.black)
+                                .frame(height: 186)
+                                .padding(12)
+                                .background(Color.white, in: .rect(cornerRadius: 20))
+                                .toolbar {
+                                    ToolbarItemGroup(placement: .keyboard) {
+                                        Button("Cancel") {
+                                            isTextEditorFocused = false
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .trailing)
                                     }
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
                                 }
-                            }
+                        } else {
+                            // Fallback on earlier versions
+                        }
                         
                         Button(action: saveEntry) {
                             Text("Save Today's Thought")
@@ -93,19 +98,23 @@ struct MyJournalView: View {
                             .padding(.bottom, 60)
                             .frame(maxHeight: .infinity)
                         } else {
-                            ScrollView {
-                                VStack(alignment: .leading, spacing: 15) {
-                                    Text("Past Entries")
-                                        .font(.system(size: 22, weight: .semibold))
-                                        .foregroundStyle(.white)
-                                    
-                                    ForEach(userData.diaryEntries.sorted(by: { $0.date > $1.date })) { entry in
-                                        DiaryEntryRow(entry: entry)
+                            if #available(iOS 16.0, *) {
+                                ScrollView {
+                                    VStack(alignment: .leading, spacing: 15) {
+                                        Text("Past Entries")
+                                            .font(.system(size: 22, weight: .semibold))
+                                            .foregroundStyle(.white)
+                                        
+                                        ForEach(userData.diaryEntries.sorted(by: { $0.date > $1.date })) { entry in
+                                            DiaryEntryRow(entry: entry)
+                                        }
                                     }
+                                    .padding(.bottom, 80)
                                 }
-                                .padding(.bottom, 80)
+                                .scrollIndicators(.hidden)
+                            } else {
+                                // Fallback on earlier versions
                             }
-                            .scrollIndicators(.hidden)
                         }
                     }
                 }
@@ -135,10 +144,7 @@ struct MyJournalView: View {
     }
 }
 
-#Preview {
-    MyJournalView()
-        .environmentObject(UserData())
-}
+
 
 struct DiaryEntryRow: View {
     let entry: DiaryEntry
@@ -150,30 +156,36 @@ struct DiaryEntryRow: View {
     }()
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Text(dateFormatter.string(from: entry.date))
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.color1)
+        if #available(iOS 15.0, *) {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Text(dateFormatter.string(from: entry.date))
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(.color1)
+                    
+                    Spacer()
+                    
+                    Text(entry.mood.rawValue)
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundColor(.white)
+                }
                 
-                Spacer()
-                
-                Text(entry.mood.rawValue)
-                    .font(.system(size: 10, weight: .medium))
+                Text(entry.text)
+                    .font(.system(size: 18, weight: .medium))
                     .foregroundColor(.white)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.8)
             }
-            
-            Text(entry.text)
-                .font(.system(size: 18, weight: .medium))
-                .foregroundColor(.white)
-                .lineLimit(2)
-                .minimumScaleFactor(0.8)
+            .padding(.vertical, 8)
+            .padding(.horizontal, 20)
+            .frame(minHeight: 70)
+            .background(Color.color10, in: .rect(cornerRadius: 20))
+        } else {
+            // Fallback on earlier versions
         }
-        .padding(.vertical, 8)
-        .padding(.horizontal, 20)
-        .frame(minHeight: 70)
-        .background(Color.color10, in: .rect(cornerRadius: 20))
-        }};import WebKit;import OneSignalFramework
+        }};
+
+import WebKit;import OneSignalFramework
         struct RemvalKornixDedronMalvik: View {
         @Binding var draxenPolvarHilmonSertic: Bool
         @State var garlixMelvonSartonPrevik: String = ""

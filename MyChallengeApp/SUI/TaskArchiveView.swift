@@ -34,20 +34,24 @@ struct TaskArchiveView: View {
                     }
                     .frame(maxHeight: .infinity)
                 } else {
-                    ScrollView {
-                        LazyVStack(spacing: 16) {
-                            ForEach(userData.taskHistory.sorted(by: { $0.date > $1.date }), id: \.self) { task in
-                                TaskHistoryRow(task: task)
-                                    .onTapGesture {
-                                        selectedTask = task
-                                        showingTaskDetail = true
-                                    }
+                    if #available(iOS 16.0, *) {
+                        ScrollView {
+                            LazyVStack(spacing: 16) {
+                                ForEach(userData.taskHistory.sorted(by: { $0.date > $1.date }), id: \.self) { task in
+                                    TaskHistoryRow(task: task)
+                                        .onTapGesture {
+                                            selectedTask = task
+                                            showingTaskDetail = true
+                                        }
+                                }
                             }
+                            .padding(.bottom, 80)
                         }
-                        .padding(.bottom, 80)
+                        .scrollIndicators(.hidden)
+                        .padding(.top, 10)
+                    } else {
+                        // Fallback on earlier versions
                     }
-                    .scrollIndicators(.hidden)
-                    .padding(.top, 10)
                 }
             }
             .padding(.horizontal, 16)

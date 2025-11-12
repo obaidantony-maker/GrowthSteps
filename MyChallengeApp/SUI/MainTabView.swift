@@ -14,8 +14,12 @@ struct MainTabView: View {
                 TodaysPowerView()
                     .tag(0)
                 
-                MyJournalView()
-                    .tag(1)
+                if #available(iOS 15.0, *) {
+                    MyJournalView()
+                        .tag(1)
+                } else {
+                    // Fallback on earlier versions
+                }
                 
                 TaskArchiveView()
                     .tag(2)
@@ -34,25 +38,29 @@ struct CustomTabBar: View {
     @Binding var selectedTab: Int
     
     var body: some View {
-        HStack(spacing: 2) {
-            ForEach(0..<4) { tab in
-                Image(getIconName(for: tab, isSelected: selectedTab == tab))
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 40)
-                    .padding(.vertical, 10)
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        selectedTab = tab
-                    }
+        if #available(iOS 16.0, *) {
+            HStack(spacing: 2) {
+                ForEach(0..<4) { tab in
+                    Image(getIconName(for: tab, isSelected: selectedTab == tab))
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .padding(.vertical, 10)
+                        .frame(maxWidth: .infinity)
+                        .onTapGesture {
+                            selectedTab = tab
+                        }
+                }
             }
+            .background(
+                Color.color5
+                    .clipShape(.rect(topLeadingRadius: 20, topTrailingRadius: 20))
+                    .ignoresSafeArea(edges: .bottom)
+            )
+            .padding(.horizontal, 8)
+        } else {
+            // Fallback on earlier versions
         }
-        .background(
-            Color.color5
-                .clipShape(.rect(topLeadingRadius: 20, topTrailingRadius: 20))
-                .ignoresSafeArea(edges: .bottom)
-        )
-        .padding(.horizontal, 8)
     }
     
     private func getIconName(for tab: Int, isSelected: Bool) -> String {

@@ -14,9 +14,17 @@ struct TaskCardView: View {
         case .select:
             SelectedCardView(task: task)
         case .completed:
-            CompletedCardView(cardNumber: cardNumber, category: category, task: task, isCompleted: true)
+            if #available(iOS 15.0, *) {
+                CompletedCardView(cardNumber: cardNumber, category: category, task: task, isCompleted: true)
+            } else {
+                // Fallback on earlier versions
+            }
         case .didNotComplete:
-            CompletedCardView(cardNumber: cardNumber, category: category, task: task, isCompleted: false)
+            if #available(iOS 15.0, *) {
+                CompletedCardView(cardNumber: cardNumber, category: category, task: task, isCompleted: false)
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
 }

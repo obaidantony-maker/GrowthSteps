@@ -15,19 +15,20 @@ struct TaskDetailView: View {
     }()
     
     var body: some View {
-        VStack(spacing: 0) {
-            TitleView(title: "Task")
-                .overlay(alignment: .leading) {
-                    Button {
-                        backAction()
-                    } label: {
-                        Image(.backArrow)
-                            .resizable()
-                            .frame(width: 26, height: 26)
-                            .padding(.leading, 16)
+        if #available(iOS 15.0, *) {
+            VStack(spacing: 0) {
+                TitleView(title: "Task")
+                    .overlay(alignment: .leading) {
+                        Button {
+                            backAction()
+                        } label: {
+                            Image(.backArrow)
+                                .resizable()
+                                .frame(width: 26, height: 26)
+                                .padding(.leading, 16)
+                        }
                     }
-                }
-            
+                
                 VStack(spacing: 12) {
                     HStack {
                         Text(dateFormatter.string(from: task.date))
@@ -82,10 +83,13 @@ struct TaskDetailView: View {
                     .padding(.vertical, 12)
                 }
                 .padding(.top, 20)
+            }
+            .padding(.vertical, 12)
+            .padding(.horizontal, 20)
+            .background(Color.white, in: .rect(cornerRadius: 20))
+            .padding(12)
+        } else {
+            // Fallback on earlier versions
         }
-        .padding(.vertical, 12)
-        .padding(.horizontal, 20)
-        .background(Color.white, in: .rect(cornerRadius: 20))
-        .padding(12)
     }
 }
